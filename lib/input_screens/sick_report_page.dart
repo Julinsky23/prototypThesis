@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thesis_prototyp/main.dart';
-import 'package:thesis_prototyp/speech_to_text_page.dart' as stt;
+import 'package:thesis_prototyp/app_features/speech_to_text_page.dart' as stt;
 
 
 class SickReportPage extends StatefulWidget{
@@ -11,6 +11,7 @@ class SickReportPage extends StatefulWidget{
   final String? selectedOption2;
 
   SickReportPage({
+    super.key,
     required this.approval,
     required this.note,
     required this.email,

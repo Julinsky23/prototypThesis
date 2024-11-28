@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:thesis_prototyp/speech_to_text_page.dart';
+import 'package:thesis_prototyp/app_features/speech_to_text_page.dart';
 
 class TopBar extends StatelessWidget implements PreferredSizeWidget {
   @override

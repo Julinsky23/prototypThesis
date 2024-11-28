@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'desktop/desktop_view.dart';
-import 'mobile_view.dart';
+import 'desktop_views/desktop_view.dart';
+import 'mobile_views/mobile_view.dart';
 
 class HomePage extends StatelessWidget{
   @override

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
-import 'vacation_request_page.dart';
-import 'workingtime_registration_page.dart';
-import 'sick_report_page.dart';
-import 'nav_drawer.dart';
-import 'main.dart';
+import 'package:thesis_prototyp/input_screens/vacation_request_page.dart';
+import 'package:thesis_prototyp/input_screens/workingtime_registration_page.dart';
+import 'package:thesis_prototyp/input_screens/sick_report_page.dart';
+import 'package:thesis_prototyp/desktop_views/nav_drawer.dart';
+
 
 class SpeechText extends StatefulWidget{
   const SpeechText({super.key});
@@ -19,19 +19,27 @@ class _SpeechTextState extends State<SpeechText>{
   bool _hasNavigated = false;
   String _recognizedText = "";
   String _fullRecognizedText = "";
-  Timer? timer;
+  Timer? _timer;
   late stt.SpeechToText _speech;
 
   final Map<String, List<String>> keywords = {
-    'Krankmeldung' : ['Franz', 'franz'],
+    'Krankmeldung' : ['Krankmeldung', 'krank', 'Krankheit'],
     'Urlaubsantrag' : ['Urlaubsantrag', 'Urlaub', 'Ferien'],
-    'genehmigungen' : ['genehmigt', 'Bestätigung'],
+    'genehmigungen' : ['genehmigt', 'Bestätigung', 'Genehmigung'],
     'notiz': ['Notiz', 'Bemerkung', 'Kommentar', 'Hinweis'],
     'email': ['e-mail', 'Email', 'Mailadresse','Kontakt'],
   };
 
   bool containsAny(String text, List<String> words){
     return words.any((word)=>text.contains(word));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _speech = stt.SpeechToText();
+    _hasNavigated = false;
+    _listen(); //Spracherkennung automatisch starten, wenn Seite offen ist
   }
 
   void _listen() async{
@@ -57,8 +65,12 @@ class _SpeechTextState extends State<SpeechText>{
             if(_recognizedText.contains("starte")){
               stopListening();
               setState(() => _hasNavigated = true);
-              NavDrawerState().startTimer();
-              Navigator.popUtil(context,(route)=>route.isFirst);
+              //NavDrawerState().startTimer();
+              Navigator.popUntil(context,(route)=>route.isFirst);
+            }else if(_recognizedText.contains("Abbruch")){
+              stopListening();
+              setState(() => _hasNavigated = true);
+              Navigator.popUntil(context,(route)=>route.isFirst);
             }
 
             if(containsAny(_recognizedText, keywords['Krankmeldung']!)){
@@ -81,7 +93,7 @@ class _SpeechTextState extends State<SpeechText>{
 
               _navigateTo(SickReportPage(
                   approval: parsedValues['genehmigung'] ?? '',
-                  note: parsedValues['note'] ?? '',
+                  note: parsedValues['notiz'] ?? '',
                   email: parsedValues['email'] ?? '',
                   selectedOption: selectedOption,
                   selectedOption2: selectedOption2,
@@ -91,11 +103,11 @@ class _SpeechTextState extends State<SpeechText>{
             if(val.recognizedWords.contains("arbeitsblock")){
               setState(() => _hasNavigated = true);
               var parsedValues = _parseText2(_recognizedText);
-              _navigateTo(WorkingtimeRegistrationPage(
+              _navigateTo(WorkingtimeRegistration(
                 start: parsedValues['start'] ?? '',
-                end: parsedValues['end'] ?? '',
-                activity: parsedValues['activity'] ?? '',
-                description: parsedValues['description'] ?? '',
+                end: parsedValues['ende'] ?? '',
+                activity: parsedValues['aktivitat'] ?? '',
+                description: parsedValues['beschreibung'] ?? '',
               ));
             }
 
@@ -167,7 +179,7 @@ class _SpeechTextState extends State<SpeechText>{
 
     final endeMatch = endeRegExp.firstMatch(text);
     if(endeMatch!=null){
-      ende = endeMatch.group(1)?.trim() ?? '';
+      end = endeMatch.group(1)?.trim() ?? '';
     }
 
     final aktivitatMatch = aktivitatRegExp.firstMatch(text);
@@ -175,7 +187,7 @@ class _SpeechTextState extends State<SpeechText>{
       activity = aktivitatMatch.group(1)?.trim() ?? '';
     }
 
-    fiinal beschreibungMatch = beschreibungRegExp.firstMatch(text);
+    final beschreibungMatch = beschreibungRegExp.firstMatch(text);
     if(beschreibungMatch != null){
       description = beschreibungMatch.group(1)?.trim() ?? '';
     }
@@ -193,12 +205,20 @@ class _SpeechTextState extends State<SpeechText>{
 
     if(containsAny(_fullRecognizedText, keywords['Krankmeldung']!)){
       _hasNavigated = true;
-      var parsedValues = parseText(_fullRecognizedText);
+      var parsedValues = _parseText(_fullRecognizedText);
       _navigateTo(SickReportPage(
           approval: parsedValues['approval'] ?? '',
           note: parsedValues['note'] ?? '',
           email: parsedValues['email'] ?? '',
           ));
+    }else if (containsAny(_fullRecognizedText, keywords['Urlaubsantrag']!)) {
+      _hasNavigated = true;
+      var parsedValues = _parseText(_fullRecognizedText);
+      _navigateTo(VacationRequestPage(
+        approval: parsedValues['genehmigung'] ?? '',
+        note: parsedValues['notiz'] ?? '',
+        email: parsedValues['email'] ?? '',
+      ));
     }
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'home_page.dart';
-import 'main.dart';
+import '../home_page.dart';
+import '../main.dart';
 
 class VacationRequestPage extends StatefulWidget {
   final String approval;

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:thesis_prototyp/timer.dart';
+import 'package:thesis_prototyp/app_features/timer.dart';
 
 class NavDrawer extends StatefulWidget{
   const NavDrawer({Key? key}) : super(key: key);

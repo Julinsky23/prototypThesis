@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import '../home_page.dart';
 
 
 class WorkingtimeRegistration extends StatelessWidget {
@@ -61,29 +61,29 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text('Block anlegen')),
+      appBar: AppBar(title: const Text('Block anlegen')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _startController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Arbeitsbeginn',
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: TextField(
                     controller: _endController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Arbeitsende',
                     ),
@@ -92,7 +92,7 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
               ],
             ),
             SizedBox(height: 20),
-            Text(
+            const Text(
               'AKTIVITÄT (OPTIONAL)',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
@@ -103,15 +103,15 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
                 labelText: 'Bitte eingeben',
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'BESCHREIBUNG',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             TextField(
               controller: _descriptionController,
               maxLines: 5,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Bitte eingeben',
               ),
@@ -127,7 +127,7 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlue,
               ),
-              child: Row(
+              child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.arrow_back_ios),
