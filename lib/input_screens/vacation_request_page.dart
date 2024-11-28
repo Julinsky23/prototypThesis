@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import '../home_page.dart';
-import '../main.dart';
+import 'package:thesis_prototyp/home_page.dart';
 
+//Page for reporting Vacation Requests
 class VacationRequestPage extends StatefulWidget {
   final String approval;
   final String note;
@@ -55,7 +55,17 @@ class _VacationRequestState extends State<VacationRequestPage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text('Neuer Urlaubsantrag')),
+      appBar: AppBar(title:
+      const Text('Neuer Urlaubsantrag'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()), // back to HomePage
+            );
+          },
+        ),),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -69,6 +79,7 @@ class _VacationRequestState extends State<VacationRequestPage>{
               children: [
                 Expanded(
                   child: DropdownButton<String>(
+                    isExpanded: true,
                     value: selectedOption,
                     hint: Text('Urlaubsart auswählen'),
                     items: optionsVacationType.map((String option){
@@ -79,14 +90,15 @@ class _VacationRequestState extends State<VacationRequestPage>{
                     }).toList(),
                     onChanged: (String? newValue){
                       setState((){
-                        selectedOption = newValue; //Zustand aktualisieren
+                        selectedOption = newValue; //update Status
                       });
                     },
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: DropdownButton<String>(
+                    isExpanded: true,
                     value: selectedOption2,
                     hint: Text('Dauer auswählen'),
                     items: optionsVacationDuration.map((String option2){
@@ -116,7 +128,7 @@ class _VacationRequestState extends State<VacationRequestPage>{
                 labelText: 'Bitte eingeben',
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             const Text(
               'NOTIZ',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -125,10 +137,22 @@ class _VacationRequestState extends State<VacationRequestPage>{
               controller: _noteController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
+                labelText: 'Bitte eingeben',
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'E-MAILS',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            TextField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
                 labelText: 'E-Mail Adresse eingeben',
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: (){
                 Navigator.pop(context);

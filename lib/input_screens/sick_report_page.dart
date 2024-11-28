@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:thesis_prototyp/home_page.dart';
 import 'package:thesis_prototyp/main.dart';
 import 'package:thesis_prototyp/app_features/speech_to_text_page.dart' as stt;
 
-
+//Page for reporting absence from work
 class SickReportPage extends StatefulWidget{
   final String approval;
   final String note;
@@ -36,8 +37,8 @@ class _SickReportPageState extends State<SickReportPage>{
   @override
   void initState(){
     super.initState();
-    selectedOption = widget.selectedOption ?? optionsSickReportType[0];
-    selectedOption2 = widget.selectedOption2 ?? optionsSickReportDuration[0];
+    selectedOption = widget.selectedOption;
+    selectedOption2 = widget.selectedOption2;
 
     _approvalController = TextEditingController(text: widget.approval);
     _noteController = TextEditingController(text: widget.note);
@@ -55,7 +56,16 @@ class _SickReportPageState extends State<SickReportPage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: const Text('Neue Krankmeldung')),
+      appBar: AppBar(title: const Text('Neue Krankmeldung'),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        },
+      )),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -69,6 +79,7 @@ class _SickReportPageState extends State<SickReportPage>{
               children: [
                 Expanded(
                   child: DropdownButton<String>(
+                    isExpanded: true,
                     value: selectedOption,
                     hint: const Text('Art der Krankmeldung auswählen'),
                     items: optionsSickReportType.map((String option){
@@ -87,6 +98,7 @@ class _SickReportPageState extends State<SickReportPage>{
                 const SizedBox(width: 10),
                 Expanded(
                   child: DropdownButton<String>(
+                    isExpanded: true,
                     value: selectedOption2,
                     hint: const Text('Dauer auswählen'),
                     items: optionsSickReportDuration.map((String option2){

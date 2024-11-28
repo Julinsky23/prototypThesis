@@ -4,9 +4,9 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:thesis_prototyp/input_screens/vacation_request_page.dart';
 import 'package:thesis_prototyp/input_screens/workingtime_registration_page.dart';
 import 'package:thesis_prototyp/input_screens/sick_report_page.dart';
-import 'package:thesis_prototyp/desktop_views/nav_drawer.dart';
+//import 'package:thesis_prototyp/desktop_views/nav_drawer.dart';
 
-
+//Page for speech recognition and output Page of recognized Words
 class SpeechText extends StatefulWidget{
   const SpeechText({super.key});
 
@@ -23,7 +23,7 @@ class _SpeechTextState extends State<SpeechText>{
   late stt.SpeechToText _speech;
 
   final Map<String, List<String>> keywords = {
-    'Krankmeldung' : ['Krankmeldung', 'krank', 'Krankheit'],
+    'Krankmeldung' : ['Abwesenheit vermerken'],
     'Urlaubsantrag' : ['Urlaubsantrag', 'Urlaub', 'Ferien'],
     'genehmigungen' : ['genehmigt', 'Bestätigung', 'Genehmigung'],
     'notiz': ['Notiz', 'Bemerkung', 'Kommentar', 'Hinweis'],
@@ -39,9 +39,10 @@ class _SpeechTextState extends State<SpeechText>{
     super.initState();
     _speech = stt.SpeechToText();
     _hasNavigated = false;
-    _listen(); //Spracherkennung automatisch starten, wenn Seite offen ist
+    _listen(); //speech recognition starts when page is open
   }
 
+  //starts speech recognition, initializes resources & activates listening
   void _listen() async{
     if(!_isListening){
       bool available = await _speech.initialize();
@@ -52,15 +53,18 @@ class _SpeechTextState extends State<SpeechText>{
           _fullRecognizedText = "";
         });
         _speech.listen(onResult: (val){
+          //processes recognized words, removes spaces & replaces abbreviations
           setState((){
             _recognizedText = val.recognizedWords.trim();
             _recognizedText = replaceTextAbbreviations(val.recognizedWords.trim());
             _fullRecognizedText += " " + _recognizedText;
           });
 
+          //text analysis starts after 2 Seconds to ensure complete speech input of User
           _timer?.cancel();
-          _timer = Timer(Duration(seconds: 2), () => _analyzeText());
+          _timer = Timer(const Duration(seconds: 2), () => _analyzeText());
 
+          //searches for recognized words to execute commands
           if(!_hasNavigated){
             if(_recognizedText.contains("starte")){
               stopListening();
@@ -92,8 +96,8 @@ class _SpeechTextState extends State<SpeechText>{
               }
 
               _navigateTo(SickReportPage(
-                  approval: parsedValues['genehmigung'] ?? '',
-                  note: parsedValues['notiz'] ?? '',
+                  approval: parsedValues['approval'] ?? '',
+                  note: parsedValues['note'] ?? '',
                   email: parsedValues['email'] ?? '',
                   selectedOption: selectedOption,
                   selectedOption2: selectedOption2,
@@ -105,9 +109,9 @@ class _SpeechTextState extends State<SpeechText>{
               var parsedValues = _parseText2(_recognizedText);
               _navigateTo(WorkingtimeRegistration(
                 start: parsedValues['start'] ?? '',
-                end: parsedValues['ende'] ?? '',
-                activity: parsedValues['aktivitat'] ?? '',
-                description: parsedValues['beschreibung'] ?? '',
+                end: parsedValues['end'] ?? '',
+                activity: parsedValues['activity'] ?? '',
+                description: parsedValues['description'] ?? '',
               ));
             }
 
@@ -131,8 +135,8 @@ class _SpeechTextState extends State<SpeechText>{
               }
 
               _navigateTo(VacationRequestPage(
-              approval: parsedValues['genehmigung'] ?? '',
-                  note: parsedValues['notiz'] ?? '',
+              approval: parsedValues['approval'] ?? '',
+                  note: parsedValues['note'] ?? '',
                   email: parsedValues['email'] ?? '',
                   selectedVacationType: selectedVacationType,
                   selectedVacationDuration: selectedVacationDuration,
@@ -140,7 +144,7 @@ class _SpeechTextState extends State<SpeechText>{
             }
           }
         },
-        localeId: "de_DE",
+        localeId: "de_DE", //sets language & region to German/y
         );
       }
     }else{
@@ -157,10 +161,12 @@ class _SpeechTextState extends State<SpeechText>{
     }
   }
 
+  //replaces "Punkt" with "." to prevent errors
   String replaceTextAbbreviations(String text){
     return text.replaceAll(RegExp(r'\bPunkt\b', caseSensitive: false), '.');
   }
 
+  //extracts information from speech recognition and returns it for workingtime_registration
   Map<String, String> _parseText2(String text){
     String start = '';
     String end = '';
@@ -200,6 +206,7 @@ class _SpeechTextState extends State<SpeechText>{
     };
   }
 
+  //checks for keywords & navigates to pages after text has been parsed
   void _analyzeText(){
     if(_hasNavigated) return;
 
@@ -215,13 +222,13 @@ class _SpeechTextState extends State<SpeechText>{
       _hasNavigated = true;
       var parsedValues = _parseText(_fullRecognizedText);
       _navigateTo(VacationRequestPage(
-        approval: parsedValues['genehmigung'] ?? '',
-        note: parsedValues['notiz'] ?? '',
+        approval: parsedValues['approval'] ?? '',
+        note: parsedValues['note'] ?? '',
         email: parsedValues['email'] ?? '',
       ));
     }
   }
-
+  //extracts information from speech recognition and returns it
   Map<String, String> _parseText(String text){
     String approval = '';
     String note = '';
@@ -257,6 +264,7 @@ class _SpeechTextState extends State<SpeechText>{
 
   }
 
+  //stops speech recognition, updates state & navigates to specified page
   void _navigateTo(Widget page){
     _speech.stop();
     setState(() {
@@ -269,6 +277,7 @@ class _SpeechTextState extends State<SpeechText>{
     );
   }
 
+  //User view page of recognized text
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -287,7 +296,7 @@ class _SpeechTextState extends State<SpeechText>{
               SizedBox(height: 20),
               Text(
                 _recognizedText.isEmpty ? "Hier sehen Sie den erkannten Text" : _recognizedText,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
           )

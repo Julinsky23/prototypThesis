@@ -1,7 +1,6 @@
 import 'dart:async';
 
 
-
 class TimerController {
   int _start = 0;
   bool isTimerRunning = false;
@@ -9,7 +8,6 @@ class TimerController {
 
   int get start => _start;
 
-  // Startet den Timer
   void startTimer(void Function() onUpdate) {
     if (!isTimerRunning) {
       isTimerRunning = true;
@@ -20,7 +18,6 @@ class TimerController {
     }
   }
 
-  // Stoppt den Timer
   void stopTimer() {
     if (isTimerRunning) {
       isTimerRunning = false;
@@ -28,14 +25,14 @@ class TimerController {
     }
   }
 
-  // Setzt den Timer zurück
+  //reset Timer
   void deleteTimer(void Function() onReset) {
     stopTimer();
     _start = 0;
     onReset();
   }
 
-  // Formatierte Zeit
+  // Formatted display of the timer
   String formatTime() {
     final int hours = _start ~/ 3600;
     final int minutes = (_start % 3600) ~/ 60;

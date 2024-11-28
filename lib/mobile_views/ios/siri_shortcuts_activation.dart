@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_siri_shortcuts/flutter_siri_shortcuts.dart';
 
+//Page to activate shortcuts for Siri
 class SettingsPage extends StatelessWidget{
   const SettingsPage({super.key});
 
@@ -14,7 +15,7 @@ class SettingsPage extends StatelessWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             const Text('Siri-Befehle aktivieren:',
             style: TextStyle(
               fontSize: 24,
@@ -22,26 +23,28 @@ class SettingsPage extends StatelessWidget{
               decoration: TextDecoration.underline,
             ),),
               const SizedBox(height: 50),
-              Text('Zum Starten des Timers:'),
+              const Text('Zum Starten des Timers:'),
               const SizedBox(height: 40),
               AddToSiriButton(
-                title: 'Schichtbeginn',
-                id: 'com.vamos.startWork',
-                url: 'https://someurl.com',
+                title: 'Arbeitstag beginnen',
+                id: 'com.thesis_prototyp.startWork',
+                url: 'http://someurl.com',
               ),
+            const SizedBox(height: 50),
+            const Text('Zum Stoppen des Timers:'),
             const SizedBox(height: 40),
             AddToSiriButton(
               title: 'Arbeitstag beenden',
-              id: 'com.vamos.resetTimer',
-              url: 'https://someurl.com',
+              id: 'com.thesis_prototyp.stopTimer',
+              url: 'http://someurl.com',
             ),
-            const SizedBox(height: 70),
-            Text('Zum Zurücksetzen des Timers:'),
+            const SizedBox(height: 50),
+            const Text('Zum Zurücksetzen des Timers:'),
             const SizedBox(height: 40),
             AddToSiriButton(
-              title: 'Arbeitszeit verwerfen',
-              id: 'com.vamos.resetTimer',
-              url: 'https://someurl.com',
+              title: 'Arbeitstag verwerfen',
+              id: 'com.thesis_prototyp.resetTimer',
+              url: 'http://someurl.com',
             ),
           ],
         ),

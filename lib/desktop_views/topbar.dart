@@ -5,11 +5,11 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('Home Prototyp'),
+      title: const Text('Home Prototyp'),
       backgroundColor: Colors.grey[300],
       actions: <Widget>[
         IconButton(
-          icon: Icon(Icons.volume_up),
+          icon: const Icon(Icons.volume_up),
           onPressed: () {
             Navigator.push(
               context,
@@ -19,13 +19,13 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
         IconButton(
-          icon: Icon(Icons.language),
+          icon: const Icon(Icons.language),
           onPressed: () {
             print("Notification Button pressed");
           },
         ),
         IconButton(
-          icon: Icon(Icons.help),
+          icon: const Icon(Icons.help),
           onPressed: (){
             print("Help button pressed");
           },
@@ -33,11 +33,12 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
         const Text(
           'Max Mustermann',
         ),
-        SizedBox(width: 20),
+        const SizedBox(width: 20),
       ],
     );
   }
 
+  //returns preferred height of widget & sets it to standard height of AppBar
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

@@ -37,23 +37,23 @@ class NavDrawerState extends State<NavDrawer>{
           ),
         ),
         ListTile(
-          leading: Icon(Icons.house),
-          title:Text('Dashboard'),
+          leading: const Icon(Icons.house),
+          title:const Text('Dashboard'),
           onTap: () =>{},
         ),
         ListTile(
-          leading: Icon(Icons.person),
-          title: Text('Mein Bereich'),
+          leading: const Icon(Icons.person),
+          title: const Text('Mein Bereich'),
           onTap: () =>{},
         ),
         ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('Einstellungen'),
+          leading: const Icon(Icons.settings),
+          title: const Text('Einstellungen'),
           onTap: () =>{},
         ),
-        SizedBox(height: 200),
+        const SizedBox(height: 200),
         Padding(
-          padding: EdgeInsets.only(left: 120.0, right: 0.0, top: 5.0, bottom: 5.0),
+          padding: const EdgeInsets.only(left: 120.0, right: 0.0, top: 5.0, bottom: 5.0),
           child: Text(
             _timerController.formatTime(),
             style: const TextStyle(fontSize: 16),
@@ -61,19 +61,18 @@ class NavDrawerState extends State<NavDrawer>{
         ),
         const SizedBox(height: 10),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 35.0,vertical: 5.0),
+          padding: const EdgeInsets.symmetric(horizontal: 35.0,vertical: 5.0),
           child: ElevatedButton(
             onPressed: (){
-
               _timerController.startTimer((){
                 setState(() {});
                });
               },
             style:ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              padding: EdgeInsets.all(20),
+              shape: const CircleBorder(),
+              padding: const EdgeInsets.all(20),
             ),
-            child: Icon(Icons.play_arrow),
+            child: const Icon(Icons.play_arrow),
           ),
         ),
         ElevatedButton(
@@ -83,17 +82,16 @@ class NavDrawerState extends State<NavDrawer>{
               });
                });
              },
-            child: Text('Timer löschen'),
+            child: const Text('Timer löschen'),
         ),
         const SizedBox(height: 5),
         ElevatedButton(
           onPressed: () {
             _timerController.stopTimer();
             setState(() {
-
             });
            },
-          child: Text('Timer beenden'),
+          child: const Text('Timer beenden'),
         ),
       ],
     ),

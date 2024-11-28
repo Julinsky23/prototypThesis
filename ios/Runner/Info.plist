@@ -2,7 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <!-- Deine bestehende Konfiguration -->
     <key>CADisableMinimumFrameDurationOnPhone</key>
     <true/>
     <key>UIBackgroundModes</key>
@@ -11,15 +10,10 @@
     </array>
     <key>NSSiriUsageDescription</key>
     <string>Diese App benötigt Zugriff auf Siri, um benutzerdefinierte Shortcuts zu erstellen und den Timer zu steuern.</string>
-
-    <!-- Mikrofonberechtigung für Spracherkennung -->
     <key>NSMicrophoneUsageDescription</key>
-    <string>Die App benötigt Zugriff auf das Mikrofon, um Sprachbefehle zu erkennen.</string>
-
-    <!-- Neue Spracherkennungsberechtigung -->
+    <string>Die App benötigt Zugriff auf das Mikrofon, um Sprachbefehle erkennen zu können.</string>
     <key>NSSpeechRecognitionUsageDescription</key>
     <string>Die App benötigt Zugriff auf die Spracherkennung, um gesprochene Befehle zu verstehen und darauf zu reagieren.</string>
-
     <key>CFBundleDevelopmentRegion</key>
     <string>$(DEVELOPMENT_LANGUAGE)</string>
     <key>CFBundleDisplayName</key>
@@ -44,10 +38,10 @@
     <true/>
     <key>NSUserActivityTypes</key>
     <array>
-        <string>com.vamos.startWork</string>
-        <string>com.vamos.startTimer</string>
-        <string>com.vamos.stopTimer</string>
-        <string>com.vamos.resetTimer</string>
+        <string>com.thesis_prototyp.startWork</string>
+        <string>com.thesis_prototyp.startTimer</string>
+        <string>com.thesis_prototyp.stopTimer</string>
+        <string>com.thesis_prototyp.resetTimer</string>
     </array>
     <key>UIApplicationSupportsIndirectInputEvents</key>
     <true/>

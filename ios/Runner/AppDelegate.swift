@@ -24,6 +24,7 @@ import Intents
         return true
   }
 
+  //checks if transferred Siri-Shortcuts corresponds to the supported activities from list
   private func handleSiriShortcut(_ userActivity: NSUserActivity){
   let supportedActivities = [
   "com.thesis_prototyp.startWork",
@@ -31,6 +32,7 @@ import Intents
   "com.thesis_prototyp.resetTimer"
   ]
 
+  //checks if user activity is one of supported activities
   guard supportedActivities.contains(userActivity.activityType) else { return }
   guard let controller = window?.rootViewController as? FlutterViewController else { return }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../home_page.dart';
+import 'package:thesis_prototyp/home_page.dart';
 
-
+//Page for reporting working time
 class WorkingtimeRegistration extends StatelessWidget {
   final String activity;
   final String description;
@@ -9,6 +9,7 @@ class WorkingtimeRegistration extends StatelessWidget {
   final String end;
 
   const WorkingtimeRegistration({
+    super.key,
     required this.activity,
     required this.description,
     required this.start,
@@ -61,7 +62,16 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: const Text('Block anlegen')),
+      appBar: AppBar(title: const Text('Block anlegen'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          },
+        ),),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -91,14 +101,14 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             const Text(
               'AKTIVITÄT (OPTIONAL)',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             TextField(
               controller: _activityController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Bitte eingeben',
               ),
@@ -116,7 +126,7 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
                 labelText: 'Bitte eingeben',
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: (){
                 Navigator.push(
