@@ -45,8 +45,6 @@ import Intents
   //Calls Flutter method "onSiriShortcut" & passes User activity
   channel.invokeMethod("onSiriShortcut", arguments: ["activityType": userActivity.activityType])
 
-
-
   //haptic feedback for User if shortcut executed successful
   let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
   feedbackGenerator.prepare()

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:thesis_prototyp/input_screens/sick_report_page.dart';
 import 'package:thesis_prototyp/input_screens/vacation_request_page.dart';
 import 'package:thesis_prototyp/input_screens/workingtime_registration_page.dart';
+import 'package:thesis_prototyp/widgets/controls/custom_elevated_button.dart';
 import 'nav_drawer.dart';
 import 'topbar.dart';
 
@@ -52,8 +53,10 @@ class DesktopView extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
-                                  _buildButton('Arbeitszeit hinzufügen', 'assets/images/Arbeitszeit_Button.png', () {
-                                    Navigator.push(
+                                  CustomElevatedButton(
+                                    label: 'Arbeitszeit hinzufügen',
+                                    imagePath: 'assets/images/Arbeitszeit_Button.png',
+                                    onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => const WorkingtimeRegistration(
@@ -63,8 +66,8 @@ class DesktopView extends StatelessWidget {
                                           description: '',
                                         ),
                                       ),
-                                    );
-                                  }),
+                                    ),
+                                  ),
                                   _buildButton('Neuer Urlaubsantrag', 'assets/images/Urlaubsantrag_Button.png', () {
                                     Navigator.push(
                                       context,
