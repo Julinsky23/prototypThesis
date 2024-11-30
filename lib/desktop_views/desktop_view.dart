@@ -3,6 +3,7 @@ import 'package:thesis_prototyp/input_screens/sick_report_page.dart';
 import 'package:thesis_prototyp/input_screens/vacation_request_page.dart';
 import 'package:thesis_prototyp/input_screens/workingtime_registration_page.dart';
 import 'package:thesis_prototyp/widgets/controls/custom_elevated_button.dart';
+import '../constants/app_images.dart';
 import 'nav_drawer.dart';
 import 'topbar.dart';
 
@@ -55,7 +56,7 @@ class DesktopView extends StatelessWidget {
                                 children: <Widget>[
                                   CustomElevatedButton(
                                     label: 'Arbeitszeit hinzufügen',
-                                    imagePath: 'assets/images/Arbeitszeit_Button.png',
+                                    imagePath: AppImages.button_workingtime,
                                     onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -68,6 +69,35 @@ class DesktopView extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                  CustomElevatedButton(
+                                    label: 'Neuer Urlaubsantrag',
+                                    imagePath: AppImages.button_vacationRequest,
+                                    onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => VacationRequestPage(
+                                          approval: '',
+                                          note: '',
+                                          email: '',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  CustomElevatedButton(
+                                    label: 'Neue Krankmeldung',
+                                    imagePath: AppImages.button_sickReport,
+                                    onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SickReportPage(
+                                          approval: '',
+                                          note: '',
+                                          email: '',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  /*
                                   _buildButton('Neuer Urlaubsantrag', 'assets/images/Urlaubsantrag_Button.png', () {
                                     Navigator.push(
                                       context,
@@ -91,12 +121,12 @@ class DesktopView extends StatelessWidget {
                                         ),
                                       ),
                                     );
-                                  }),
+                                  }),*/
                                 ],
                               ),
                               const SizedBox(height: 10),
                               Image.asset(
-                                'assets/images/Companion_Monatsuebersicht.png',
+                                AppImages.companion_overview,
                                 width: 580,
                                 height: 300,
                               ),
@@ -116,7 +146,7 @@ class DesktopView extends StatelessWidget {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(60.0),
                                 child: Image.asset(
-                                  'assets/images/Urlaubsanzeige.png',
+                                  AppImages.vacation_view,
                                   width: 400,
                                   height: 200,
                                 ),

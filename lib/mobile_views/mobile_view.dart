@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:thesis_prototyp/constants/app_images.dart';
 import 'package:thesis_prototyp/mobile_views/ios/siri_shortcuts_activation.dart';
 import 'package:thesis_prototyp/input_screens/sick_report_page.dart';
 import 'package:thesis_prototyp/app_features/speech_to_text_page.dart';
@@ -195,7 +196,7 @@ class _MobileViewState extends State<MobileView> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
-                      'assets/images/Urlaubsanzeige.png',
+                      AppImages.vacation_view,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
