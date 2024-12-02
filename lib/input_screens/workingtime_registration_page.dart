@@ -65,9 +65,7 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
       appBar: AppBar(title: const Text('Block anlegen'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: (){
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

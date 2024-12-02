@@ -84,9 +84,7 @@ class _VacationRequestState extends State<VacationRequestPage>{
                       );
                     }).toList(),
                     onChanged: (String? newValue){
-                      setState((){
-                        selectedOption = newValue; //update Status
-                      });
+                      setState(() => selectedOption = newValue);
                     },
                   ),
                 ),
@@ -95,7 +93,7 @@ class _VacationRequestState extends State<VacationRequestPage>{
                   child: DropdownButton<String>(
                     isExpanded: true,
                     value: selectedOption2,
-                    hint: Text('Dauer auswählen'),
+                    hint: const Text('Dauer auswählen'),
                     items: optionsVacationDuration.map((String option2){
                       return DropdownMenuItem<String>(
                         value: option2,
@@ -103,15 +101,13 @@ class _VacationRequestState extends State<VacationRequestPage>{
                       );
                     }).toList(),
                     onChanged: (String? newValue2){
-                      setState((){
-                        selectedOption2 = newValue2;
-                      });
+                      setState(() => selectedOption2 = newValue2);
                     },
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             const Text(
               'GENEHMIGUNG ERTEILT DURCH: ',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -149,9 +145,7 @@ class _VacationRequestState extends State<VacationRequestPage>{
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: (){
-                Navigator.pop(context);
-              },
+              onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlue,
               ),

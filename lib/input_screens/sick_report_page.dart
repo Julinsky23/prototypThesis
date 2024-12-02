@@ -84,9 +84,7 @@ class _SickReportPageState extends State<SickReportPage>{
                       );
                     }).toList(),
                     onChanged: (String? newValue){
-                      setState((){
-                        selectedOption = newValue;
-                      });
+                      setState(() => selectedOption = newValue);
                     },
                   ),
                 ),
@@ -103,9 +101,7 @@ class _SickReportPageState extends State<SickReportPage>{
                       );
                     }).toList(),
                     onChanged: (String? newValue2){
-                      setState(() {
-                        selectedOption2 = newValue2;
-                      });
+                      setState(() => selectedOption2 = newValue2,);
                     },
                   ),
                 ),
@@ -149,9 +145,7 @@ class _SickReportPageState extends State<SickReportPage>{
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: (){
-                Navigator.pop(context);
-              },
+              onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlue,
               ),
