@@ -70,6 +70,7 @@ class _SpeechTextState extends State<SpeechText>{
               stopListening();
               setState(() => _hasNavigated = true);
               //NavDrawerState().startTimer();
+
               Navigator.popUntil(context,(route)=>route.isFirst);
             }else if(_recognizedText.contains("Abbruch")){
               stopListening();

@@ -34,17 +34,13 @@ class _MobileViewState extends State<MobileView> {
           // Processing of the activity types so that the timer can be controlled
           if (activityType == 'com.thesis_prototyp.startWork') {
             print("Siri shortcut invoked: Arbeitstag beginnen");
-            _timerController.startTimer(() {
-              setState(() {});
-            });
+            _timerController.startTimer(() => setState(() {}));
           } else if (activityType == 'com.thesis_prototyp.stopTimer') {
             print("Siri shortcut invoked: Arbeitstag beenden");
             _timerController.stopTimer();
           } else if (activityType == 'com.thesis_prototyp.resetTimer') {
             print("Siri shortcut invoked: Arbeitszeit verwerfen");
-            _timerController.deleteTimer(() {
-              setState(() {});
-            });
+            _timerController.deleteTimer(() => setState(() {}));
           }
         }
       });
