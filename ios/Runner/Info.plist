@@ -39,7 +39,6 @@
     <key>NSUserActivityTypes</key>
     <array>
         <string>com.thesis_prototyp.startWork</string>
-        <string>com.thesis_prototyp.startTimer</string>
         <string>com.thesis_prototyp.stopTimer</string>
         <string>com.thesis_prototyp.resetTimer</string>
     </array>

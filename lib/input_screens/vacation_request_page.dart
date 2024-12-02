@@ -59,12 +59,7 @@ class _VacationRequestState extends State<VacationRequestPage>{
       const Text('Neuer Urlaubsantrag'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()), // back to HomePage
-            );
-          },
+            onPressed: () => Navigator.pop(context),
         ),),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

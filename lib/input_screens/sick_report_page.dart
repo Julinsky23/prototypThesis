@@ -59,12 +59,7 @@ class _SickReportPageState extends State<SickReportPage>{
       appBar: AppBar(title: const Text('Neue Krankmeldung'),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
-        onPressed: (){
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
-        },
+        onPressed: () => Navigator.pop(context),
       )),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
