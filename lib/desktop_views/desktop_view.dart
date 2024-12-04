@@ -124,11 +124,11 @@ class DesktopView extends StatelessWidget {
                                   }),*/
                                 ],
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 50),
                               Image.asset(
                                 AppImages.companion_overview,
                                 width: 580,
-                                height: 300,
+                                height: 200,
                               ),
                             ],
                           ),

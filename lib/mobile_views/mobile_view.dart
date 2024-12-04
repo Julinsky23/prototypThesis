@@ -19,6 +19,12 @@ class MobileView extends StatefulWidget {
 class _MobileViewState extends State<MobileView> {
   final TimerController _timerController = TimerController();
 
+
+  //TEST METHODE
+  void refresh(){
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -29,17 +35,17 @@ class _MobileViewState extends State<MobileView> {
           .setMethodCallHandler((MethodCall call) async {
         if (call.method == 'onSiriShortcut') {
           final activityType = call.arguments['activityType'];
-          print("Siri shortcut invoked with activity: $activityType");
+          debugPrint("Siri shortcut invoked with activity: $activityType");
 
           // Processing of the activity types so that the timer can be controlled
           if (activityType == 'com.thesis_prototyp.startWork') {
-            print("Siri shortcut invoked: Arbeitstag beginnen");
+            debugPrint("Siri shortcut invoked: Arbeitstag beginnen");
             _timerController.startTimer(() => setState(() {}));
           } else if (activityType == 'com.thesis_prototyp.stopTimer') {
-            print("Siri shortcut invoked: Arbeitstag beenden");
+            debugPrint("Siri shortcut invoked: Arbeitstag beenden");
             _timerController.stopTimer();
           } else if (activityType == 'com.thesis_prototyp.resetTimer') {
-            print("Siri shortcut invoked: Arbeitszeit verwerfen");
+            debugPrint("Siri shortcut invoked: Arbeitszeit verwerfen");
             _timerController.deleteTimer(() => setState(() {}));
           }
         }
