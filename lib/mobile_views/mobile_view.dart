@@ -8,15 +8,20 @@ import 'package:thesis_prototyp/input_screens/workingtime_registration_page.dart
 import 'package:thesis_prototyp/app_features/timer.dart';
 import 'dart:io';
 
+import '../app_features/timer_provider.dart';
+
 //Screen for devices with width < 600
 class MobileView extends StatefulWidget {
   const MobileView({super.key});
 
   @override
-  _MobileViewState createState() => _MobileViewState();
+  MobileViewState createState() => MobileViewState();
 }
 
-class _MobileViewState extends State<MobileView> {
+class MobileViewState extends State<MobileView> {
+  static final MobileViewState _instance = MobileViewState._internal();
+  factory MobileViewState() => _instance;
+  MobileViewState._internal();
   final TimerController _timerController = TimerController();
 
 
@@ -40,13 +45,16 @@ class _MobileViewState extends State<MobileView> {
           // Processing of the activity types so that the timer can be controlled
           if (activityType == 'com.thesis_prototyp.startWork') {
             debugPrint("Siri shortcut invoked: Arbeitstag beginnen");
-            _timerController.startTimer(() => setState(() {}));
+            //_timerController.startTimer(() => setState(() {}));
+            TimerProvider.timerController.startTimer(() => setState((){}));
           } else if (activityType == 'com.thesis_prototyp.stopTimer') {
             debugPrint("Siri shortcut invoked: Arbeitstag beenden");
-            _timerController.stopTimer();
+            //_timerController.stopTimer();
+            TimerProvider.timerController.stopTimer();
           } else if (activityType == 'com.thesis_prototyp.resetTimer') {
             debugPrint("Siri shortcut invoked: Arbeitszeit verwerfen");
-            _timerController.deleteTimer(() => setState(() {}));
+            //_timerController.deleteTimer(() => setState(() {}));
+            TimerProvider.timerController.deleteTimer(() => setState(() {}));
           }
         }
       });
@@ -148,7 +156,8 @@ class _MobileViewState extends State<MobileView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    _timerController.formatTime(),
+                    //_timerController.formatTime(),
+                    TimerProvider.timerController.formatTime(),
                     style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
@@ -157,10 +166,14 @@ class _MobileViewState extends State<MobileView> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          setState(() {
+                          /*setState(() {
                             _timerController.startTimer(() {
                               setState(() {});
-                            });
+                            });*/
+                            TimerProvider.timerController.startTimer((){
+                              setState((){
+
+                              });
                           });
                         },
                         style: ElevatedButton.styleFrom(
@@ -171,18 +184,23 @@ class _MobileViewState extends State<MobileView> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          setState(() {
+                          /*setState(() {
                             _timerController.stopTimer();
-                          });
+                          });*/
+                          TimerProvider.timerController.stopTimer();
                         },
                         child: const Icon(Icons.stop, color: Colors.lightBlue),
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          setState(() {
+                          /*setState(() {
                             _timerController.deleteTimer(() {
                               setState(() {});
-                            });
+                            });*/
+                            TimerProvider.timerController.deleteTimer((){
+                              setState((){
+
+                              });
                           });
                         },
                         child: const Icon(Icons.delete, color: Colors.lightBlue),

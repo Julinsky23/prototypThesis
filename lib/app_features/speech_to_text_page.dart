@@ -81,7 +81,8 @@ class _SpeechTextState extends State<SpeechText>{
                 if(kIsWeb) {
                   NavDrawerState().refresh();
                 }else if(Platform.isAndroid || Platform.isIOS){
-                 // _MobileViewState().refresh();
+                 MobileViewState().refresh();
+                 print("BEFEHL AUSGEFUHRT");
                 }
               });
               Navigator.popUntil(context,(route)=>route.isFirst);
