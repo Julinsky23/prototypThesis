@@ -80,9 +80,10 @@ class _SpeechTextState extends State<SpeechText>{
                 //setState(() {});
                 if(kIsWeb) {
                   NavDrawerState().refresh();
+                  debugPrint("Timer started on web application");
                 }else if(Platform.isAndroid || Platform.isIOS){
                  MobileViewState().refresh();
-                 print("BEFEHL AUSGEFUHRT");
+                 debugPrint("Timer started on mobile device");
                 }
               });
               Navigator.popUntil(context,(route)=>route.isFirst);
@@ -90,6 +91,31 @@ class _SpeechTextState extends State<SpeechText>{
               stopListening();
               setState(() => _hasNavigated = true);
               Navigator.popUntil(context,(route)=>route.isFirst);
+            }else if(_recognizedText.contains("beende")){
+              stopListening();
+              setState(() => _hasNavigated = true);
+              TimerProvider.timerController.stopTimer();
+              if(kIsWeb) {
+                NavDrawerState().refresh();
+                debugPrint("Timer stopped on web application");
+              }else if(Platform.isAndroid || Platform.isIOS){
+                MobileViewState().refresh();
+                debugPrint("Timer stopped on mobile device");
+              }
+              Navigator.popUntil(context,(route)=>route.isFirst);
+            }else if(_recognizedText.contains("zurücksetzen")){
+              stopListening();
+              setState(() => _hasNavigated = true);
+              TimerProvider.timerController.deleteTimer((){
+                if(kIsWeb) {
+                  NavDrawerState().refresh();
+                  debugPrint("Timer started on web application");
+                }else if(Platform.isAndroid || Platform.isIOS){
+                  MobileViewState().refresh();
+                  debugPrint("Timer started on mobile device");
+                }
+                Navigator.popUntil(context,(route)=>route.isFirst);
+              });
             }
 
             if(containsAny(_recognizedText, keywords['Krankmeldung']!)){
