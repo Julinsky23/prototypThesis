@@ -73,17 +73,22 @@ class _SpeechTextState extends State<SpeechText>{
           //searches for recognized words to execute commands
           if(!_hasNavigated){
               final actionMap = {
-                "starte" : () => _handleStart(),
-                "abbruch": () => _handleCancel(),
-                "beende": () => _handleStop(),
-                "zurücksetzen": () => _handleReset(),
+                ["starte", "Timer beginnen", "Arbeitszeit starten", "beginne Arbeitszeit", "starte Arbeitstag"] : () => _handleStart(),
+                ["abbruch", "falsche Eingabe", "Spracheingabe beenden", "beende Spracherkennung"]: () => _handleCancel(),
+                ["beende", "Timer stoppen", "stoppe Timer"]: () => _handleStop(),
+                ["zurücksetzen", "Arbeitszeit verwerfen", "Timer auf Null setzen"]: () => _handleReset(),
               };
 
-              for(var action in actionMap.keys){
-                if(_recognizedText.contains(action)){
+              bool containsKeyword(String text, List<String> keywords){
+                final lowerText = text.toLowerCase();
+                return keywords.any((keyword) => lowerText.contains(keyword.toLowerCase()));
+              }
+
+              for(var entry in actionMap.entries){
+                if(containsKeyword(_recognizedText, entry.key)){
                   stopListening();
                   setState(() => _hasNavigated = true);
-                  actionMap[action]!();
+                  entry.value();
                   break;
                 }
               }
