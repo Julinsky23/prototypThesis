@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:thesis_prototyp/app_features/timer.dart';
+import 'package:thesis_prototyp/app_features/timer_provider.dart';
 
 class NavDrawer extends StatefulWidget{
   const NavDrawer({Key? key}) : super(key: key);
@@ -16,6 +17,10 @@ class NavDrawerState extends State<NavDrawer>{
 
   final TimerController _timerController = TimerController();
 
+  //TEST METHODE
+  void refresh(){
+    setState(() {});
+  }
 
 @override
   Widget build(BuildContext context){
@@ -55,7 +60,8 @@ class NavDrawerState extends State<NavDrawer>{
         Padding(
           padding: const EdgeInsets.only(left: 120.0, right: 0.0, top: 5.0, bottom: 5.0),
           child: Text(
-            _timerController.formatTime(),
+            //_timerController.formatTime(),
+            TimerProvider.timerController.formatTime(),
             style: const TextStyle(fontSize: 16),
           ),
         ),
@@ -64,9 +70,14 @@ class NavDrawerState extends State<NavDrawer>{
           padding: const EdgeInsets.symmetric(horizontal: 35.0,vertical: 5.0),
           child: ElevatedButton(
             onPressed: (){
-              _timerController.startTimer((){
+              TimerProvider.timerController.startTimer((){
+                setState(() {
+
+                });
+              });
+              /*_timerController.startTimer((){
                 setState(() {});
-               });
+               });*/
               },
             style:ElevatedButton.styleFrom(
               shape: const CircleBorder(),
@@ -77,19 +88,25 @@ class NavDrawerState extends State<NavDrawer>{
         ),
         ElevatedButton(
           onPressed: (){
-            _timerController.deleteTimer(() {
+            TimerProvider.timerController.deleteTimer((){
+              setState(() {
+
+              });
+            });
+           /* _timerController.deleteTimer(() {
               setState(() {
               });
-               });
+               });*/
              },
             child: const Text('Timer löschen'),
         ),
         const SizedBox(height: 5),
         ElevatedButton(
           onPressed: () {
-            _timerController.stopTimer();
+            TimerProvider.timerController.stopTimer();
+           /* _timerController.stopTimer();
             setState(() {
-            });
+            });*/
            },
           child: const Text('Timer beenden'),
         ),

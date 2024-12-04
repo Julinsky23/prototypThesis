@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:thesis_prototyp/app_features/timer_provider.dart';
 import 'package:thesis_prototyp/input_screens/vacation_request_page.dart';
 import 'package:thesis_prototyp/input_screens/workingtime_registration_page.dart';
 import 'package:thesis_prototyp/input_screens/sick_report_page.dart';
+import 'package:thesis_prototyp/mobile_views/mobile_view.dart';
+import '../desktop_views/nav_drawer.dart';
 //import 'package:thesis_prototyp/desktop_views/nav_drawer.dart';
 
 //Page for speech recognition and output Page of recognized Words
@@ -21,6 +26,7 @@ class _SpeechTextState extends State<SpeechText>{
   String _fullRecognizedText = "";
   Timer? _timer;
   late stt.SpeechToText _speech;
+  //TimerProvider timerProvider = TimerProvider
 
   final Map<String, List<String>> keywords = {
     'Krankmeldung' : ['Abwesenheit vermerken'],
@@ -70,7 +76,14 @@ class _SpeechTextState extends State<SpeechText>{
               stopListening();
               setState(() => _hasNavigated = true);
               //NavDrawerState().startTimer();
-
+              TimerProvider.timerController.startTimer((){
+                //setState(() {});
+                if(kIsWeb) {
+                  NavDrawerState().refresh();
+                }else if(Platform.isAndroid || Platform.isIOS){
+                 // _MobileViewState().refresh();
+                }
+              });
               Navigator.popUntil(context,(route)=>route.isFirst);
             }else if(_recognizedText.contains("Abbruch")){
               stopListening();
