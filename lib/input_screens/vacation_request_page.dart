@@ -10,7 +10,7 @@ class VacationRequestPage extends StatefulWidget {
   final String? selectedVacationType;
   final String? selectedVacationDuration;
 
-  VacationRequestPage({
+  const VacationRequestPage({
     required this.approval,
     required this.note,
     required this.email,

@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:thesis_prototyp/home_page.dart';
 
 //Page for reporting working time
-class WorkingtimeRegistration extends StatelessWidget {
+class WorkingtimeRegistrationPage extends StatefulWidget {
   final String activity;
   final String description;
   final String start;
   final String end;
 
-  const WorkingtimeRegistration({
+  const WorkingtimeRegistrationPage({
     super.key,
     required this.activity,
     required this.description,
     required this.start,
     required this.end,
 });
-
+/*
   @override
   Widget build(BuildContext context){
     return MaterialApp(
@@ -38,13 +38,13 @@ class WorkingtimeRegistrationPage extends StatefulWidget{
   final Map<String,String> parsedData;
 
   WorkingtimeRegistrationPage({required this.parsedData});
-
+*/
   @override
-  _WorkingtimeRegistrationPageState createState() => _WorkingtimeRegistrationPageState();
+  _WorkingtimeRegistrationState createState() => _WorkingtimeRegistrationState();
 
 }
 
-class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPage>{
+class _WorkingtimeRegistrationState extends State<WorkingtimeRegistrationPage>{
   late TextEditingController _activityController;
   late TextEditingController _descriptionController;
   late TextEditingController _startController;
@@ -53,10 +53,18 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
   @override
   void initState(){
     super.initState();
-    _activityController = TextEditingController(text: widget.parsedData['activity']);
-    _descriptionController = TextEditingController(text: widget.parsedData['description']);
-    _startController = TextEditingController(text: widget.parsedData['start']);
-    _endController = TextEditingController(text: widget.parsedData['end']);
+    _activityController = TextEditingController(text: widget.activity);
+    _descriptionController = TextEditingController(text: widget.description);
+    _startController = TextEditingController(text: widget.start);
+    _endController = TextEditingController(text: widget.end);
+  }
+
+  @override
+  void dispose(){
+    _activityController.dispose();
+    _descriptionController.dispose();
+    _startController.dispose();
+    super.dispose();
   }
 
   @override

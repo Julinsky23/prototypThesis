@@ -148,7 +148,7 @@ class _SpeechTextState extends State<SpeechText>{
             if(val.recognizedWords.contains("arbeitsblock")){
               setState(() => _hasNavigated = true);
               var parsedValues = _parseText2(_recognizedText);
-              _navigateTo(WorkingtimeRegistration(
+              _navigateTo(WorkingtimeRegistrationPage(
                 start: parsedValues['start'] ?? '',
                 end: parsedValues['end'] ?? '',
                 activity: parsedValues['activity'] ?? '',

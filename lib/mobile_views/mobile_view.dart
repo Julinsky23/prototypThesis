@@ -115,7 +115,7 @@ class MobileViewState extends State<MobileView> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const WorkingtimeRegistration(
+                        builder: (context) => const WorkingtimeRegistrationPage(
                           start: '',
                           end: '',
                           activity: '',

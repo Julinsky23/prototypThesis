@@ -60,7 +60,7 @@ class DesktopView extends StatelessWidget {
                                     onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const WorkingtimeRegistration(
+                                        builder: (context) => const WorkingtimeRegistrationPage(
                                           start: '',
                                           end: '',
                                           activity: '',
