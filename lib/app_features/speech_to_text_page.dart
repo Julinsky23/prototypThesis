@@ -72,51 +72,21 @@ class _SpeechTextState extends State<SpeechText>{
 
           //searches for recognized words to execute commands
           if(!_hasNavigated){
-            if(_recognizedText.contains("starte")){
-              stopListening();
-              setState(() => _hasNavigated = true);
-              //NavDrawerState().startTimer();
-              TimerProvider.timerController.startTimer((){
-                //setState(() {});
-                if(kIsWeb) {
-                  NavDrawerState().refresh();
-                  debugPrint("Timer started on web application");
-                }else if(Platform.isAndroid || Platform.isIOS){
-                 MobileViewState().refresh();
-                 debugPrint("Timer started on mobile device");
+              final actionMap = {
+                "starte" : () => _handleStart(),
+                "abbruch": () => _handleCancel(),
+                "beende": () => _handleStop(),
+                "zurücksetzen": () => _handleReset(),
+              };
+
+              for(var action in actionMap.keys){
+                if(_recognizedText.contains(action)){
+                  stopListening();
+                  setState(() => _hasNavigated = true);
+                  actionMap[action]!();
+                  break;
                 }
-              });
-              Navigator.popUntil(context,(route)=>route.isFirst);
-            }else if(_recognizedText.contains("Abbruch")){
-              stopListening();
-              setState(() => _hasNavigated = true);
-              Navigator.popUntil(context,(route)=>route.isFirst);
-            }else if(_recognizedText.contains("beende")){
-              stopListening();
-              setState(() => _hasNavigated = true);
-              TimerProvider.timerController.stopTimer();
-              if(kIsWeb) {
-                NavDrawerState().refresh();
-                debugPrint("Timer stopped on web application");
-              }else if(Platform.isAndroid || Platform.isIOS){
-                MobileViewState().refresh();
-                debugPrint("Timer stopped on mobile device");
               }
-              Navigator.popUntil(context,(route)=>route.isFirst);
-            }else if(_recognizedText.contains("zurücksetzen")){
-              stopListening();
-              setState(() => _hasNavigated = true);
-              TimerProvider.timerController.deleteTimer((){
-                if(kIsWeb) {
-                  NavDrawerState().refresh();
-                  debugPrint("Timer started on web application");
-                }else if(Platform.isAndroid || Platform.isIOS){
-                  MobileViewState().refresh();
-                  debugPrint("Timer started on mobile device");
-                }
-                Navigator.popUntil(context,(route)=>route.isFirst);
-              });
-            }
 
             if(containsAny(_recognizedText, keywords['Krankmeldung']!)){
               setState(() => _hasNavigated = true);
@@ -193,12 +163,47 @@ class _SpeechTextState extends State<SpeechText>{
     }
   }
 
+  void _handleStart() {
+    stopListening();
+    TimerProvider.timerController.startTimer(() => _refreshView());
+    Navigator.popUntil(context, (route) => route.isFirst);
+  }
+
+  void _handleStop(){
+    stopListening();
+    TimerProvider.timerController.stopTimer();
+    _refreshView();
+    Navigator.popUntil(context, (route) => route.isFirst);
+  }
+
+  void _handleCancel(){
+    stopListening();
+    Navigator.popUntil(context, (route) => route.isFirst);
+  }
+
+  void _handleReset(){
+    stopListening();
+    TimerProvider.timerController.deleteTimer(() => _refreshView());
+    Navigator.popUntil(context, (route) => route.isFirst);
+  }
+
+  void _refreshView(){
+    if(kIsWeb){
+      NavDrawerState().refresh();
+      debugPrint("View on web application refreshed");
+    }else if(Platform.isAndroid || Platform.isIOS){
+      MobileViewState().refresh();
+      debugPrint("View on mobile device refreshed");
+    }
+  }
+
   void stopListening(){
     if(_isListening){
       _speech.stop();
       _timer?.cancel();
       _analyzeText();
       setState(()=> _isListening = false);
+      setState(() => _hasNavigated = true);
     }
   }
 
@@ -301,8 +306,6 @@ class _SpeechTextState extends State<SpeechText>{
       'note': note,
       'email': email,
     };
-
-
   }
 
   //stops speech recognition, updates state & navigates to specified page
@@ -334,7 +337,7 @@ class _SpeechTextState extends State<SpeechText>{
                 "Spracheingabe:",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 _recognizedText.isEmpty ? "Hier sehen Sie den erkannten Text" : _recognizedText,
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
