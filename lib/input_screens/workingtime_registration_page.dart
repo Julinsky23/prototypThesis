@@ -64,7 +64,7 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
     return Scaffold(
       appBar: AppBar(title: const Text('Block anlegen'),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () => Navigator.pop(context),
         ),),
       body: Padding(
@@ -123,12 +123,7 @@ class _WorkingtimeRegistrationPageState extends State<WorkingtimeRegistrationPag
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context)=>HomePage()),
-                );
-              },
+              onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlue,
               ),

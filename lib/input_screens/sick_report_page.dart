@@ -58,7 +58,7 @@ class _SickReportPageState extends State<SickReportPage>{
     return Scaffold(
       appBar: AppBar(title: const Text('Neue Krankmeldung'),
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
+        icon: const Icon(Icons.arrow_back_ios),
         onPressed: () => Navigator.pop(context),
       )),
       body: Padding(
