@@ -1,7 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:thesis_prototyp/services/app_features/timer.dart';
 import 'package:thesis_prototyp/services/app_features/timer_provider.dart';
+
 
 class NavDrawer extends StatefulWidget{
   const NavDrawer({Key? key}) : super(key: key);
@@ -14,8 +13,6 @@ class NavDrawerState extends State<NavDrawer>{
   static final NavDrawerState _instance = NavDrawerState._internal();
   factory NavDrawerState() => _instance;
   NavDrawerState._internal();
-
-  final TimerController _timerController = TimerController();
 
   //TEST METHODE
   void refresh(){
@@ -60,7 +57,6 @@ class NavDrawerState extends State<NavDrawer>{
         Padding(
           padding: const EdgeInsets.only(left: 120.0, right: 0.0, top: 5.0, bottom: 5.0),
           child: Text(
-            //_timerController.formatTime(),
             TimerProvider.timerController.formatTime(),
             style: const TextStyle(fontSize: 16),
           ),
@@ -75,9 +71,6 @@ class NavDrawerState extends State<NavDrawer>{
 
                 });
               });
-              /*_timerController.startTimer((){
-                setState(() {});
-               });*/
               },
             style:ElevatedButton.styleFrom(
               shape: const CircleBorder(),
@@ -93,10 +86,6 @@ class NavDrawerState extends State<NavDrawer>{
 
               });
             });
-           /* _timerController.deleteTimer(() {
-              setState(() {
-              });
-               });*/
              },
             child: const Text('Timer löschen'),
         ),
@@ -104,9 +93,6 @@ class NavDrawerState extends State<NavDrawer>{
         ElevatedButton(
           onPressed: () {
             TimerProvider.timerController.stopTimer();
-           /* _timerController.stopTimer();
-            setState(() {
-            });*/
            },
           child: const Text('Timer beenden'),
         ),

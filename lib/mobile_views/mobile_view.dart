@@ -22,10 +22,7 @@ class MobileViewState extends State<MobileView> {
   static final MobileViewState _instance = MobileViewState._internal();
   factory MobileViewState() => _instance;
   MobileViewState._internal();
-  final TimerController _timerController = TimerController();
 
-
-  //TEST METHODE
   void refresh(){
     setState(() {});
   }

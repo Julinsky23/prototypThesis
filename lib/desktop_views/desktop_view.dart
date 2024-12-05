@@ -75,7 +75,7 @@ class DesktopView extends StatelessWidget {
                                     onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => VacationRequestPage(
+                                        builder: (context) => const VacationRequestPage(
                                           approval: '',
                                           note: '',
                                           email: '',
@@ -97,31 +97,6 @@ class DesktopView extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  /*
-                                  _buildButton('Neuer Urlaubsantrag', 'assets/images/Urlaubsantrag_Button.png', () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => VacationRequestPage(
-                                          approval: '',
-                                          note: '',
-                                          email: '',
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                                  _buildButton('Neue Krankmeldung', 'assets/images/Krankmeldung_Button.png', () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => SickReportPage(
-                                          approval: '',
-                                          note: '',
-                                          email: '',
-                                        ),
-                                      ),
-                                    );
-                                  }),*/
                                 ],
                               ),
                               const SizedBox(height: 50),
@@ -162,28 +137,6 @@ class DesktopView extends StatelessWidget {
             ),
           ),
         ),
-      ],
-    );
-  }
-
-  //creates standardized buttons
-  Widget _buildButton(String label, String imagePath, VoidCallback onPressed) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            shape: const CircleBorder(),
-            padding: const EdgeInsets.all(20),
-          ),
-          child: Image.asset(
-            imagePath,
-            width: 30,
-            height: 30,
-          ),
-        ),
-        const SizedBox(height: 5),
-        Text(label, style: const TextStyle(fontSize: 12)),
       ],
     );
   }
