@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:thesis_prototyp/home_page.dart';
 
 import '../widgets/controls/custom_back_button.dart';
+import '../widgets/controls/custom_text_field.dart';
+import '../widgets/controls/custom_textfield_label.dart';
 
 //Page for reporting working time
 class WorkingtimeRegistrationPage extends StatefulWidget {
@@ -17,30 +19,7 @@ class WorkingtimeRegistrationPage extends StatefulWidget {
     required this.start,
     required this.end,
 });
-/*
-  @override
-  Widget build(BuildContext context){
-    return MaterialApp(
-      title: 'Block anlegen',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: WorkingtimeRegistrationPage(parsedData: {
-        'activity': activity,
-        'description': description,
-        'start':start,
-        'end':end,
-      },),
-    );
-  }
-}
 
-class WorkingtimeRegistrationPage extends StatefulWidget{
-  final Map<String,String> parsedData;
-
-  WorkingtimeRegistrationPage({required this.parsedData});
-*/
   @override
   _WorkingtimeRegistrationState createState() => _WorkingtimeRegistrationState();
 
@@ -104,22 +83,15 @@ class _WorkingtimeRegistrationState extends State<WorkingtimeRegistrationPage>{
               ],
             ),
             const SizedBox(height: 20),
-            const Text(
-              'AKTIVITÄT (OPTIONAL)',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            TextField(
+            const CustomTextfieldLabel(text: 'AKTIVITÄT (OPTIONAL)'),
+            CustomTextField(
               controller: _activityController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Bitte eingeben',
-              ),
+              labelText: 'E-Mail Adresse eingeben',
+              hintText: 'example@domain.com',
+              keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 20),
-            const Text(
-              'BESCHREIBUNG',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            const CustomTextfieldLabel(text: 'BESCHREIBUNG'),
             TextField(
               controller: _descriptionController,
               maxLines: 5,

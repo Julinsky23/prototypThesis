@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:thesis_prototyp/home_page.dart';
+import 'package:thesis_prototyp/widgets/controls/custom_textfield_label.dart';
 
 import '../widgets/controls/custom_back_button.dart';
+import '../widgets/controls/custom_text_field.dart';
 
 //Page for reporting Vacation Requests
 class VacationRequestPage extends StatefulWidget {
@@ -65,10 +67,7 @@ class _VacationRequestState extends State<VacationRequestPage>{
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'ART DES URLAUBS',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
+            const CustomTextfieldLabel(text: 'ART DES URLAUBS'),
             Row(
               children: [
                 Expanded(
@@ -107,40 +106,26 @@ class _VacationRequestState extends State<VacationRequestPage>{
               ],
             ),
             const SizedBox(height: 20),
-            const Text(
-              'GENEHMIGUNG ERTEILT DURCH: ',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            TextField(
+            const CustomTextfieldLabel(text: 'GENEHMIGUNG ERTEILT DURCH:'),
+            CustomTextField(
               controller: _approvalController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Bitte eingeben',
-              ),
+              labelText: 'Bitte eingeben',
+              keyboardType: TextInputType.text,
             ),
             const SizedBox(height: 20),
-            const Text(
-              'NOTIZ',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            TextField(
+            const CustomTextfieldLabel(text: 'NOTIZ'),
+            CustomTextField(
               controller: _noteController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Bitte eingeben',
-              ),
+              labelText: 'Notiz eingeben',
+              keyboardType: TextInputType.text,
             ),
             const SizedBox(height: 20),
-            const Text(
-              'E-MAILS',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            TextField(
+            const CustomTextfieldLabel(text: 'E-MAILS'),
+            CustomTextField(
               controller: _emailController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'E-Mail Adresse eingeben',
-              ),
+              labelText: 'E-Mail Adresse eingeben',
+              hintText: 'example@domain.com',
+              keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 20),
             ElevatedButton(
