@@ -11,7 +11,6 @@ import 'package:thesis_prototyp/mobile_views/mobile_view.dart';
 import 'package:thesis_prototyp/desktop_views/nav_drawer.dart';
 
 import '../../screens/recognized_text_page.dart';
-//import 'package:thesis_prototyp/desktop_views/nav_drawer.dart';
 
 //Page for speech recognition and output Page of recognized Words
 class SpeechText extends StatefulWidget{
@@ -28,11 +27,12 @@ class _SpeechTextState extends State<SpeechText>{
   String _fullRecognizedText = "";
   Timer? _timer;
   late stt.SpeechToText _speech;
-  //TimerProvider timerProvider = TimerProvider
+
 
   final Map<String, List<String>> keywords = {
     'Krankmeldung' : ['Abwesenheit vermerken'],
     'Urlaubsantrag' : ['Urlaubsantrag', 'Urlaub', 'Ferien'],
+    'Arbeitsblock' : ['Arbeitblock', 'Eintragung'],
     'genehmigungen' : ['genehmigt', 'Bestätigung', 'Genehmigung'],
     'notiz': ['Notiz', 'Bemerkung', 'Kommentar', 'Hinweis'],
     'email': ['e-mail', 'Email', 'Mailadresse','Kontakt'],
@@ -54,6 +54,15 @@ class _SpeechTextState extends State<SpeechText>{
   void _listen() async{
     if(!_isListening){
       bool available = await _speech.initialize();
+
+      if(!available){
+        setState((){
+          _isListening = false;
+          _recognizedText = "Fehler bei der Spracherkennung";
+        });
+        return;
+      }
+
       if(available){
         setState((){
           _isListening = true;
@@ -122,7 +131,7 @@ class _SpeechTextState extends State<SpeechText>{
               ));
             }
 
-            if(val.recognizedWords.contains("arbeitsblock")){
+            if(containsAny(_recognizedText, keywords['Arbeitsblock']!)){
               setState(() => _hasNavigated = true);
               var parsedValues = _parseText2(_recognizedText);
               _navigateTo(WorkingtimeRegistrationPage(
@@ -133,7 +142,7 @@ class _SpeechTextState extends State<SpeechText>{
               ));
             }
 
-            if(_recognizedText.contains("Urlaubsantrag")){
+            if(containsAny(_recognizedText, keywords['Urlaubsantrag']!)){
               setState(() => _hasNavigated = true);
               var parsedValues = _parseText(_recognizedText);
 
