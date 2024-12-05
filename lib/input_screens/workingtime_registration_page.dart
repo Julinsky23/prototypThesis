@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:thesis_prototyp/home_page.dart';
 
+import '../widgets/controls/custom_back_button.dart';
+
 //Page for reporting working time
 class WorkingtimeRegistrationPage extends StatefulWidget {
   final String activity;
@@ -71,10 +73,7 @@ class _WorkingtimeRegistrationState extends State<WorkingtimeRegistrationPage>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(title: const Text('Block anlegen'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () => Navigator.pop(context),
-        ),),
+        leading: const CustomBackButton(),),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

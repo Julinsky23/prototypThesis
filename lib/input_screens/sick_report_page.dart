@@ -3,6 +3,8 @@ import 'package:thesis_prototyp/home_page.dart';
 import 'package:thesis_prototyp/main.dart';
 import 'package:thesis_prototyp/app_features/speech_to_text_page.dart' as stt;
 
+import '../widgets/controls/custom_back_button.dart';
+
 //Page for reporting absence from work
 class SickReportPage extends StatefulWidget{
   final String approval;
@@ -57,10 +59,7 @@ class _SickReportPageState extends State<SickReportPage>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(title: const Text('Neue Krankmeldung'),
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios),
-        onPressed: () => Navigator.pop(context),
-      )),
+      leading: const CustomBackButton(),),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

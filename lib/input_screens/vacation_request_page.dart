@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:thesis_prototyp/home_page.dart';
 
+import '../widgets/controls/custom_back_button.dart';
+
 //Page for reporting Vacation Requests
 class VacationRequestPage extends StatefulWidget {
   final String approval;
@@ -57,10 +59,7 @@ class _VacationRequestState extends State<VacationRequestPage>{
     return Scaffold(
       appBar: AppBar(title:
       const Text('Neuer Urlaubsantrag'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () => Navigator.pop(context),
-        ),),
+        leading: const CustomBackButton(),),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
