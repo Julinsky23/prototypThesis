@@ -9,6 +9,8 @@ import 'package:thesis_prototyp/input_screens/workingtime_registration_page.dart
 import 'package:thesis_prototyp/input_screens/sick_report_page.dart';
 import 'package:thesis_prototyp/mobile_views/mobile_view.dart';
 import 'package:thesis_prototyp/desktop_views/nav_drawer.dart';
+
+import '../../screens/recognized_text_page.dart';
 //import 'package:thesis_prototyp/desktop_views/nav_drawer.dart';
 
 //Page for speech recognition and output Page of recognized Words
@@ -326,7 +328,6 @@ class _SpeechTextState extends State<SpeechText>{
     );
   }
 
-  //User view page of recognized text
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -334,25 +335,13 @@ class _SpeechTextState extends State<SpeechText>{
       body: SingleChildScrollView(
         reverse: true,
         child: Container(
-          padding: EdgeInsets.all(30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Spracheingabe:",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                _recognizedText.isEmpty ? "Hier sehen Sie den erkannten Text" : _recognizedText,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ],
-          )
+          padding: const EdgeInsets.all(30),
+          child: RecognizedTextPage(recognizedText: _recognizedText),
         )
       )
     );
   }
+
 
 
 }
