@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:thesis_prototyp/constants/app_images.dart';
 import 'package:thesis_prototyp/mobile_views/ios/siri_shortcuts_activation.dart';
-import 'package:thesis_prototyp/input_screens/sick_report_page.dart';
+import 'package:thesis_prototyp/screens/input_screens/sick_report_page.dart';
 import 'package:thesis_prototyp/services/app_features/speech_to_text_page.dart';
-import 'package:thesis_prototyp/input_screens/workingtime_registration_page.dart';
+import 'package:thesis_prototyp/screens/input_screens/workingtime_registration_page.dart';
 import 'package:thesis_prototyp/services/app_features/timer.dart';
 import 'dart:io';
 

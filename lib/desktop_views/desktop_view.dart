@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:thesis_prototyp/input_screens/sick_report_page.dart';
-import 'package:thesis_prototyp/input_screens/vacation_request_page.dart';
-import 'package:thesis_prototyp/input_screens/workingtime_registration_page.dart';
+import 'package:thesis_prototyp/screens/input_screens/sick_report_page.dart';
+import 'package:thesis_prototyp/screens/input_screens/vacation_request_page.dart';
+import 'package:thesis_prototyp/screens/input_screens/workingtime_registration_page.dart';
 import 'package:thesis_prototyp/widgets/controls/custom_elevated_button.dart';
 import '../constants/app_images.dart';
 import 'nav_drawer.dart';

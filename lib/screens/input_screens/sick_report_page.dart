@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:thesis_prototyp/home_page.dart';
 import 'package:thesis_prototyp/main.dart';
 import 'package:thesis_prototyp/services/app_features/speech_to_text_page.dart' as stt;
-
-import '../widgets/controls/custom_back_button.dart';
-import '../widgets/controls/custom_text_field.dart';
-import '../widgets/controls/custom_textfield_label.dart';
+import 'package:thesis_prototyp/widgets/controls/custom_back_button.dart';
+import 'package:thesis_prototyp/widgets/controls/custom_elevated_button.dart';
+import 'package:thesis_prototyp/widgets/controls/custom_text_field.dart';
+import 'package:thesis_prototyp/widgets/controls/custom_textfield_label.dart';
 
 //Page for reporting absence from work
 class SickReportPage extends StatefulWidget{
